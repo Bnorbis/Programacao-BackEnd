@@ -1,0 +1,41 @@
+function Aluno(nome, idade, RA, turma) {
+    let p_nome = nome,
+        p_idade = idade,
+        p_turma = turma,
+        p_RA = RA;
+
+    return {
+        getNome: () => p_nome,
+        getIdade: () => p_idade,
+        getTurma: () => p_turma,
+        getRA: () => p_RA
+    }
+}
+
+function Turma(codigo, nota) {
+    let p_codigo = codigo,
+        p_nota = nota;
+
+    return {
+        aprovado: () => p_nota > 7,
+        getCodigo: () => p_codigo,
+        getNota: () => p_nota,
+    };
+}
+
+function TurmaPresencial(codigo, nota, presenca) {
+    let p_presenca = presenca;
+    let turma = new Turma(codigo, nota);
+
+    return {
+        ...turma,
+        aprovado: () => p_presenca > 7 && turma.getNota() > 7,
+        getPresenca: () => p_presenca
+    };
+}
+
+let turma1 = new TurmaPresencial("101", 8, 9);
+let aluno1 = new Aluno("Bruna", 24, "123456", turma1);
+
+console.log(aluno1.getNome());
+console.log(aluno1.getTurma().aprovado()); 
