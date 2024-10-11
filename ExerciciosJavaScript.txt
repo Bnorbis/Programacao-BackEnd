@@ -1,0 +1,259 @@
+1. Escreva uma função que calcule e retorne o fatorial de um número.
+
+function calcularFatorial(num){
+    let cont = 1;
+    for(let i = 1; i <= num; i++){
+        cont = cont * i; 
+    }
+
+    return cont;
+}
+console.log(calcularFatorial(10));
+
+2. Escreva uma função que retorne uma String contendo uma sequência de
+N mensagens do texto informado pelo usuário. O valor de N e a mensagem são
+informados por parâmetro.
+
+
+function retorneString(texto, numeroMensagens) {
+
+    let listaPalavra = [];
+    for (let i = 0; i < numeroMensagens; i++) {
+        listaPalavra.push(texto)
+    }
+
+    var palavrasString = listaPalavra.join(' - ')
+
+    return palavrasString;
+
+}
+
+console.log(retorneString("Palavra", 5))
+
+3. Escreva uma função que receba 2 valores e uma operação básica: adição, subtração,
+multiplicação e divisão e retorne o resultado da operação.
+Observação: Faça a validação para prevenir a divisão por 0 e também para garantir que
+a operação informada é válida. Retorne nulo para os casos de erro.
+
+
+function operacaoBasica(valor1, valor2, operacao){
+
+	let valor3 = 0;
+
+    switch(operacao){
+        case "+":
+            valor3 = valor1+valor2;
+        break;
+        case "-":
+            valor3 = valor1-valor2
+        break;
+        case "*":
+            valor3 = valor1*valor2;
+        break;
+        case "/":
+            if(valor2 === 0){
+                console.log("Não é possível dividir por zero.");
+                return 0;
+            }
+            valor3 = valor1/valor2
+        break;
+        default: 
+        console.log("Operação não informada ou inválida.");
+        return null;
+    }
+
+    return valor3;
+
+}
+console.log(operacaoBasica(10, 0, '/'));
+console.log(operacaoBasica(-1, -2, 'l'))//inválido
+console.log(operacaoBasica(10, 5, '+')); 
+
+
+4. Escreva uma função que retorne um vetor contendo o resultado da tabuada de um
+número recebido por parâmetro. Cada resultado na respectiva posição do índice.
+
+function vetorTabuada(valor){
+    let resultado = [];
+    for(let i = 0; i <= 10; i++){
+        resultado.push(i*valor);
+    }
+
+    return resultado;
+}
+
+console.log(vetorTabuada(5))
+
+5. Escreva uma função que retorne um número fornecido pelo usuário, porém
+invertido. Por exemplo, o usuário fornece o número 875 e a função retorna o número
+578. O argumento da função e o retorno deve ser um valor inteiro.
+
+function valoresInvertidos(valor) {
+
+    const resultadosInvertidos = valor.toString().split('');
+    const resultadosInvertidosInvertidos = [];
+    for (let i = resultadosInvertidos.length - 1; i >= 0; i--) {
+        resultadosInvertidosInvertidos.push(resultadosInvertidos[i]);
+    }
+    const valoresConcatenados = resultadosInvertidosInvertidos.join('');
+
+    return parseInt(valoresConcatenados);
+
+}
+
+console.log(valoresInvertidos(234))
+
+6. Escreva uma função que permita contar o número de vogais contidas em uma string
+fornecida por parâmetro. Por exemplo, o usuário informa a string “Brocolis”, e a função
+retorna o número 3 (há 3 vogais nessa palavra).
+
+
+function contarVogais(valor){
+
+    const palavra = valor.toString().split('');
+    let cont = 0;
+    for(let i = 0; i < palavra.length; i++){
+        if(palavra[i] === 'a' || palavra[i] === 'e' || palavra[i] === 'i' || palavra[i] === 'o' || palavra[i] === 'u' || palavra[i] === 'A' || palavra[i] === 'E' || palavra[i] === 'I' || palavra[i] === 'O' || palavra[i] === 'U'){
+            cont++;
+        }
+    }
+
+    return cont;
+    
+}
+
+console.log(contarVogais('Teste'))
+
+7. Escreva uma função que receba uma sequência de parênteses e colchetes e retorne se
+a sequência está bem formada ou não. O retorno deve ser um valor lógico. Exemplo:
+“(([]))” retorna true, “(([)])” retorna falso.
+
+
+function sequenciaParenteses(valor){
+
+    let contarEntrada = 0;
+    let contarSaida = 0 
+    const palavra = valor.toString().split('');
+    const stack = [];
+    let ultimo = [];
+
+    for(let i = 0; i <= palavra.length; i++){
+        if(valor[i] === '(' || valor[i] === '['){
+            stack.push(valor[i])
+            contarEntrada++;
+        }
+        if(valor[i] === ')' || valor[i] === ']'){
+            if(stack.length === 0){
+                return 0;
+            }
+            ultimo = stack.pop();
+            contarSaida++;
+        }
+        if((valor[i] === ')' && ultimo !== '(') || (valor[i] === ']' && ultimo !== '[')) {
+            return 0;
+        }
+    }
+
+    if(contarEntrada != contarSaida || stack.length !== 0){
+        return 0;
+    }else{
+        return 1;
+    }
+   
+}
+
+
+8. Escreva uma função que receba um número e retorne uma lista de objetos (id, nome e
+idade) aleatórios gerados dinamicamente. O código deve ser sequencial; use uma lista
+de nomes pré-definida; e gere idades entre 18 e 90 anos.
+
+function geradorObjeto(valor){
+
+    const nomes = ['Bruna', 'André', 'Leonardo', 'Pedro', 'Gabriel']
+
+    const lista = [];
+    for(let i = 0; i < valor; i++){
+        let idadeAleatoria = Math.floor(Math.random() * (90-18 + 1) + 18)
+        const objeto = {
+            id: i + 1,
+            nome: nomes[Math.floor(Math.random() * nomes.length)],
+            idade: idadeAleatoria
+        }
+        lista.push(objeto);
+    }
+
+    return lista;
+
+}
+
+console.log(geradorObjeto(2))
+
+9. Escreva uma função que receba a lista de objetos gerados anteriormente e calcule a
+média de idades das pessoas presentes na lista.
+
+function geradorObjeto(valor) {
+
+    const nomes = ['Bruna', 'André', 'Leonardo', 'Pedro', 'Gabriel']
+
+    const lista = [];
+    for (let i = 0; i < valor; i++) {
+        let idadeAleatoria = Math.floor(Math.random() * (90 - 18 + 1) + 18)
+        var objeto = {
+            id: i + 1,
+            nome: nomes[Math.floor(Math.random() * nomes.length)],
+            idade: idadeAleatoria
+        }
+        lista.push(objeto);
+    }
+
+    let somaIdades = 0;
+    let contIdades = 0;
+
+    console.log("lista")
+    console.log(lista)
+
+    for (let i = 0; i < lista.length; i++) {
+        console.log(lista[i].idade)
+        somaIdades = somaIdades + lista[i].idade;
+        contIdades++;
+    }
+
+    let idadeMedia = 0;
+    idadeMedia = (somaIdades / contIdades);
+
+    return idadeMedia;
+}
+
+console.log(geradorObjeto(3))
+
+10. Escreva uma função que receba a lista de objetos gerados anteriormente e ordene os
+dados por um dos atributos informados por parâmetros.
+
+function ordenaLista(valor, parametro) {
+
+    const nomes = ['Bruna', 'André', 'Leonardo', 'Pedro', 'Gabriel']
+
+    const lista = [];
+    const listaOrdenada = [];
+    for (let i = 0; i < valor; i++) {
+        let idadeAleatoria = Math.floor(Math.random() * (90 - 18 + 1) + 18)
+        var objeto = {
+            id: i + 1,
+            nome: nomes[Math.floor(Math.random() * nomes.length)],
+            idade: idadeAleatoria
+        }
+        lista.push(objeto);
+    }
+
+    lista.sort((a, b) => {
+        if (parametro === 'id') {
+            return a.id - b.id;
+        } else if (parametro === 'nome') {
+            return a.nome.localeCompare(b.nome);
+        } else if (parametro === 'idade') {
+            return a.idade - b.idade;
+        }
+    });
+
+    return lista;
+}
